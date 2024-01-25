@@ -1,0 +1,68 @@
+.note_card {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  word-wrap: break-word;
+  border-radius: 7px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  gap: 1rem;
+  background: #fff;
+}
+.title_input,
+.content_input {
+  width: 100%;
+  background: #fff;
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+}
+.save_btn {
+  position: absolute;
+  bottom: -10px;
+  right: 18px;
+  width: 3rem;
+  border: none;
+  outline: none;
+  background: #13a500;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+.note_tilte,
+.title_input {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.note_content,
+.content_input {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+.delete_icon,
+.edit_icon {
+  position: absolute;
+  bottom: 5px;
+  width: 1rem;
+  padding: 0.1rem;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.delete_icon {
+  right: 5px;
+}
+.edit_icon {
+  right: 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .note_card {
+    width: 80%;
+  }
+}
