@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./header.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    localStorage.removeItem("authData");
+    navigate("/");
+  };
   return (
     <header className={styles.Header}>
       <div className={styles.logo}>
@@ -10,7 +17,9 @@ const Header = () => {
       <div className={styles.user_info}>
         <p>UserName</p>
       </div>
-      <button className={styles.btn}>Logout</button>
+      <button className={styles.btn} onClick={logoutUser}>
+        Logout
+      </button>
     </header>
   );
 };

@@ -10,7 +10,7 @@
 }
 .show_overlay {
   opacity: 1;
-  z-index: 1;
+  z-index: 5;
 }
 .form_modal {
   transition: 1s;
@@ -23,7 +23,7 @@
   top: -50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 5px 3px #e0dfdf;
-  z-index: 2;
+  z-index: 15;
   padding: 1rem;
 }
 .show_form_modal {

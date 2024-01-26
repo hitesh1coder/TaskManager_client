@@ -1,4 +1,4 @@
-.note_card {
+.card {
   display: flex;
   flex-direction: column;
   width: 15rem;
@@ -8,21 +8,30 @@
   border-radius: 7px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   position: relative;
-  gap: 1rem;
+  gap: 0.2rem;
   background: #fff;
+  z-index: 1;
 }
 .title_input,
 .content_input {
   width: 100%;
-  background: #fff;
+  background: #f0f0f0;
   padding: 0.2rem;
   border-radius: 0.4rem;
   border: none;
   outline: none;
 }
+.isCompleted {
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  text-align: center;
+  cursor: pointer;
+}
+
 .save_btn {
   position: absolute;
-  bottom: -10px;
+  bottom: 10px;
   right: 18px;
   width: 3rem;
   border: none;
@@ -33,10 +42,11 @@
   padding: 0.2rem 0.4rem;
   border-radius: 0.2rem;
 }
-.note_tilte,
+.task_title,
 .title_input {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  margin: 0.2rem 0;
 }
 .note_content,
 .content_input {
@@ -44,25 +54,23 @@
   font-weight: 500;
   margin-bottom: 0.8rem;
 }
+.btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .delete_icon,
 .edit_icon {
-  position: absolute;
-  bottom: 5px;
   width: 1rem;
-  padding: 0.1rem;
-  background: #ffffff;
+  height: 1rem;
+  padding: 0.2rem;
+  background: #eeeaea;
   cursor: pointer;
-  border-radius: 50%;
-}
-.delete_icon {
-  right: 5px;
-}
-.edit_icon {
-  right: 25px;
+  border-radius: 1rem;
 }
 
 @media screen and (max-width: 600px) {
-  .note_card {
+  .card {
     width: 80%;
   }
 }

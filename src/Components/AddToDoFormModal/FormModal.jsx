@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./modal.module.css";
+import axios from "axios";
+import { AuthContext } from "../../Context/userContext";
 
 const FormModal = ({ showModal, closeModal }) => {
   const [formData, setFormData] = useState({
@@ -8,12 +10,14 @@ const FormModal = ({ showModal, closeModal }) => {
   });
 
   const [error, setError] = useState("");
+
+  const { auth } = useContext(AuthContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setError("");
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     if (!formData.title || !formData.description) {
@@ -21,6 +25,18 @@ const FormModal = ({ showModal, closeModal }) => {
       return;
     } else {
       console.log(formData);
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_SERVER_HOST}/api/add-task/${
+            auth?.user?.userID
+          }`,
+          formData
+        );
+        alert(res.data?.message);
+        closeModal();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
