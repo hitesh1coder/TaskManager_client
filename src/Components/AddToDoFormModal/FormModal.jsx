@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import styles from "./modal.module.css";
+
 import axios from "axios";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/userContext";
 
 const FormModal = ({ showModal, closeModal }) => {
@@ -11,11 +13,18 @@ const FormModal = ({ showModal, closeModal }) => {
 
   const [error, setError] = useState("");
 
-  const { auth } = useContext(AuthContext);
+  const { auth, token } = useContext(AuthContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setError("");
+  };
+
+  const resetFormValue = () => {
+    setFormData({
+      title: "",
+      description: "",
+    });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,18 +33,26 @@ const FormModal = ({ showModal, closeModal }) => {
       setError("Please fill all the fields");
       return;
     } else {
-      console.log(formData);
       try {
+        const config = {
+          headers: {
+            authorization: `${token}`,
+          },
+        };
+
         const res = await axios.post(
           `${import.meta.env.VITE_SERVER_HOST}/api/add-task/${
             auth?.user?.userID
           }`,
-          formData
+          formData,
+          config
         );
-        alert(res.data?.message);
+        toast.success(res.data?.message);
         closeModal();
+        resetFormValue();
       } catch (error) {
         console.log(error);
+        toast.error(error.response?.data?.error);
       }
     }
   };
@@ -78,17 +95,7 @@ const FormModal = ({ showModal, closeModal }) => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className={styles.input_box}>
-            <label>Name :</label>
-            <input
-              type="checkbox"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div> */}
-          <p>{error}</p>
+          <p className={styles.error}>{error}</p>
           <button type="submit" className={styles.btn}>
             Add
           </button>

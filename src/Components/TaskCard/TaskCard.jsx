@@ -3,7 +3,7 @@ import styles from "./card.module.css";
 import editIcon from "../../../public/images/icons8-edit-48.png";
 import deleteIcon from "../../../public/images/icons8-delete-30.png";
 
-const ToDoCard = ({
+const TaskCard = ({
   completeTask,
   item,
   editTask,
@@ -25,6 +25,7 @@ const ToDoCard = ({
       isCompleted: item.isCompleted === "0" ? false : true,
     };
     completeTask(updatedTask);
+    setStatus(1);
   };
 
   return (
@@ -68,7 +69,7 @@ const ToDoCard = ({
                   checked={status === 1 ? true : false}
                   onChange={handleStatus}
                 />
-                {item.isCompleted === 1 ? "Completed" : "Pending"}
+                {status === 1 ? "Completed" : "Pending"}
               </label>
             </div>
             <img
@@ -92,4 +93,4 @@ const ToDoCard = ({
   );
 };
 
-export default ToDoCard;
+export default TaskCard;

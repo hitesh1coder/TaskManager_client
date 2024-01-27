@@ -10,14 +10,7 @@
   background: #fff;
   z-index: 2;
 }
-.logo {
-  width: 30vw;
-}
 
-.user_info {
-  width: 30vw;
-  display: flex;
-}
 .btn {
   padding: 0.4rem 1rem;
   border: none;

@@ -46,6 +46,10 @@
   background: #f0f0f0;
   border-radius: 0.3rem;
 }
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
 .btn {
   padding: 0.4rem 1.4rem;
   border: none;

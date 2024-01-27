@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./auth.module.css";
+
+import axios from "axios";
+import toast from "react-hot-toast";
+
 import bannerImg from "../../../public/images/bgImg.png.png";
 import { AuthContext } from "../../Context/userContext";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [formData, setFormData] = useState({
@@ -15,8 +18,8 @@ const Auth = () => {
   const [isLogIn, setIsLogIn] = useState(false);
 
   const { setAuth } = useContext(AuthContext);
-
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -34,17 +37,18 @@ const Auth = () => {
         .post(`${import.meta.env.VITE_SERVER_HOST}/api/register`, formData)
         .then((res) => {
           if (res.status === 201) {
-            alert(res.data.message);
+            toast.success(res?.data?.message);
             setIsLogIn(true);
             resetFormValue();
           }
         })
         .catch((err) => {
           console.log(err);
+          toast.error(err?.response?.data?.message);
         });
     }
-    // resetFormValue();
   };
+
   const handleUserLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -58,21 +62,19 @@ const Auth = () => {
           `${import.meta.env.VITE_SERVER_HOST}/api/login`,
           data
         );
-        console.log(res);
         if (res.status === 200) {
-          alert(res.data.message);
+          toast.success(res?.data?.message);
           setAuth(res.data);
           localStorage.setItem("authData", JSON.stringify(res.data));
           navigate("/home");
         }
       } catch (err) {
         console.log(err);
-        if (err.response.status === 401) {
-          alert(err.response?.data?.message);
-        }
+        toast.error(err.response?.data?.message);
       }
     }
   };
+
   const resetFormValue = () => {
     setFormData({
       name: "",
