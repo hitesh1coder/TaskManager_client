@@ -39,6 +39,7 @@
   padding: 0.7rem 0.4rem;
   background: #f0f0f0;
   border-radius: 0.3rem;
+  font-size: 1rem;
 }
 .btn {
   padding: 0.4rem 1.4rem;
@@ -63,4 +64,26 @@
   color: rgb(49, 49, 212);
   font-weight: 600;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    flex-direction: column;
+  }
+  .banner {
+    width: 100vw;
+    height: 30vh;
+  }
+  .banner > img {
+    width: 90vw;
+    height: 40vh;
+  }
+  .form_section {
+    height: 70vh;
+    width: 100vw;
+  }
+  .form_section > .form {
+    width: 90vw;
+  }
 }

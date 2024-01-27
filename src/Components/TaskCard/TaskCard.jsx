@@ -11,6 +11,7 @@ const TaskCard = ({
   deleteTask,
   completed,
 }) => {
+  // State variables
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [status, setStatus] = useState(item.isCompleted);
@@ -19,6 +20,7 @@ const TaskCard = ({
     const updatedTask = { ...item, title, description };
     completeTask(updatedTask);
   };
+
   const handleStatus = () => {
     const updatedTask = {
       ...item,
@@ -42,11 +44,13 @@ const TaskCard = ({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+
           <textarea
             className={styles.content_input}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+
           <button className={styles.save_btn} onClick={handleUpdateTask}>
             Save
           </button>
@@ -55,6 +59,7 @@ const TaskCard = ({
         <>
           <h3 className={styles.task_title}>{item.title}</h3>
           <p className={styles.task_content}>{item.description}</p>
+
           <div className={styles.btns}>
             <div
               className={styles.isCompleted}
@@ -72,6 +77,7 @@ const TaskCard = ({
                 {status === 1 ? "Completed" : "Pending"}
               </label>
             </div>
+
             <img
               src={deleteIcon}
               alt="deleteicon"

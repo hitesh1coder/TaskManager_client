@@ -95,7 +95,7 @@ const FormModal = ({ showModal, closeModal }) => {
               onChange={handleChange}
             />
           </div>
-          <p className={styles.error}>{error}</p>
+          {error && <p className={styles.error}>{error}</p>}
           <button type="submit" className={styles.btn}>
             Add
           </button>

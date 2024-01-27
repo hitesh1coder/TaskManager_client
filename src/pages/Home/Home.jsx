@@ -10,20 +10,23 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [data, setData] = useState([]);
-  const [editingTask, setEditingTask] = useState(null);
+  // State variables
+  const [showModal, setShowModal] = useState(false); // Controls the visibility of the modal
+  const [data, setData] = useState([]); // Stores the task data
+  const [editingTask, setEditingTask] = useState(null); // Stores the task being edited
 
   const { auth, token } = useContext(AuthContext);
+
   const handleShowModal = () => {
-    setShowModal(true);
+    setShowModal(true); // Shows the modal
   };
+
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowModal(false); // Hides the modal
   };
 
   const onEditTask = (task) => {
-    setEditingTask(task);
+    setEditingTask(task); // Sets the task being edited
   };
 
   const config = {
@@ -31,6 +34,8 @@ const Home = () => {
       authorization: `${token}`,
     },
   };
+
+  // Updates the task
   const handleUpdateTask = async (updateTask) => {
     try {
       const res = await axios.put(
@@ -38,22 +43,21 @@ const Home = () => {
         updateTask,
         config
       );
-      console.log(res);
-
       toast.success(res.data?.message);
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message);
     }
-    setEditingTask(null);
+    setEditingTask(null); // Clears the editing task
   };
+
+  // Deletes the task
   const handleDelete = async (taskId) => {
     try {
       const res = await axios.delete(
         `${import.meta.env.VITE_SERVER_HOST}/api/delete-task/${taskId}`,
         config
       );
-      console.log(res);
       if (res.status === 200) {
         setData(data.filter((task) => task.id !== taskId));
       }
@@ -63,6 +67,8 @@ const Home = () => {
       toast.error(error.response?.data?.message);
     }
   };
+
+  // Fetches the tasks
   useEffect(() => {
     axios
       .get(
@@ -77,6 +83,7 @@ const Home = () => {
         console.log(err);
       });
   }, [showModal, editingTask]);
+
   return (
     <div className={styles.container}>
       <Header />
@@ -86,6 +93,7 @@ const Home = () => {
         </button>
       </div>
       <FormModal showModal={showModal} closeModal={handleCloseModal} />
+
       <div className={styles.cards_container}>
         {data?.length === 0 ? (
           <h3 style={{ width: "100%", textAlign: "center" }}>

@@ -36,3 +36,10 @@
   text-align: center;
   padding: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .cards_container {
+    width: 90%;
+    justify-content: center;
+  }
+}
